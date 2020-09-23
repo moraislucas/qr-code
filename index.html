@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Gerador de QR Code Gratuito - Hendal Web </title>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="grid-container">
+      <div class="item">
+        <h1>Gere o seu QR Code Agora 😄</h1>
+        <label for="urlQR">Digite a URL</label>
+        <input id="urlQR" type="text" placeholder="https://www.google.com.br" />
+        <div class="box-btn">
+          <button id="btn">Gerar QR Code</button>
+        </div>
+      </div>
+
+      <div class="item">
+        <div id="qrcode"></div>
+        <span id="saidaUrl"></span>
+      </div>
+    </div>
+
+
+    <footer>
+      <p>Feito por: <a href="https://github.com/moraislucas" target="_blank">Lucas Morais</a></p>
+    </footer>
+
+  </div>
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <script>
+    function init() {
+      const btn = document.querySelector('#btn')
+      const saidaUrl = document.querySelector('#saidaUrl')
+      btn.addEventListener('click', (e) => {
+        e.preventDefault()
+        makeCode()
+      })
+      var qrcode = new QRCode("qrcode");
+
+      function makeCode() {
+        var input = document.getElementById("urlQR");
+        if (input.value) {
+          qrcode.makeCode(input.value);
+          saidaUrl.innerText = input.value;
+        } else {
+          alert('URL é obrigatória')
+          input.focus()
+        }
+      }
+
+      $("#text").
+      on("blur", function () {
+        makeCode();
+      }).
+      on("keydown", function (e) {
+        if (e.keyCode == 13) {
+          makeCode();
+        }
+      });
+    }
+
+    init();
+  </script>
+</body>
+
+</html>
